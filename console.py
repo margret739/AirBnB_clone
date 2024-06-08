@@ -236,7 +236,7 @@ class HBNBCommand(cmd.Cmd):
 
         arg_list = arg.split('.')
 
-        cls_nm = arg_list[0]  # incoming class name
+        class_name = arg_list[0]  # incoming class name
 
         command = arg_list[1].split('(')
 
