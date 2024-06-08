@@ -52,7 +52,7 @@ def split_curly_braces(e_arg):
         """ HBNBCommand console class """
         prompt = "(hbnb)"
         valid_classes = ["BaseModel", "User", "Amenity",
-                "Place", "Review", "State", "City"]
+                         "Place", "Review", "State", "City"]
 
         def emptyline(self):
             """do nothing when an empty line is entered"""
@@ -139,7 +139,7 @@ def split_curly_braces(e_arg):
             commands = shlex.split(arg)
 
             if len(commands) == 0:
-                for key, value in objects.items()
+                for key, value in objects.items():
                     if key.split('.')[0] == commands[0]:
                         print(str(value))
 
@@ -168,7 +168,8 @@ def split_curly_braces(e_arg):
 
         def do_update(self, arg):
             """ Update an instance by adding or updating an attribute.
-            Usage: update <class_name> <id> <attribute_name> "<attribute_value>"
+            Usage: update <class_name> <id> <attribute_name> "
+            <attribute_value>"
             """
 
             commands = shlex.split(arg)
@@ -232,42 +233,46 @@ def split_curly_braces(e_arg):
                 """Default behaviour for cmd module when input is invalid"""
                 arg_list = arg.split('.')
 
-                cls_nm = arg_list[0] # incoming class name
+                cls_nm = arg_list[0]  # incoming class name
 
                 command = arg_list[1].split('(')
 
-                cmd_met = command[0] #incoming command method
+                cmd_met = command[0]  # incoming command method
 
-                e_arg = command[1]].split(')')[0] #extra arguments
+                e_arg = command[1]].split(')')[0]  # extra arguments
 
-                method_dict = {
-                        'all': self.do_all,
-                        'show': self.do_show,
-                        'destroy': self.do_destroy,
-                        'update': self.do_update,
-                        'count': self.do_count
-                        }
+
+                method_dict={
+                                'all': self.do_all,
+                                'show': self.do_show,
+                                'destroy': self.do_destroy,
+                                'update': self.do_update,
+                                'count': self.do_count
+                            }
+
                 if cmd_met in method_dict.keys():
                     if cmd_met != "update":
-                        return method_dict[cmd_met]("{} {}".format(cls_nm,
-                            e_arg))
+                        return method_dict[cmd_met]("{} {}"
+                                                    .format(class_name, e_arg))
                     else:
-                        if not cls_nm:
+                        if not class_name:
                             print("** class name missing **")
                             return
                         try:
-                            obj_id, arg_dict = split_curly_braces(e_arg)
+                            obj_id, arg_dict=split_curly_braces(e_arg)
                         except Exception:
                             pass
                         try:
-                            call = method_dict[cmd_met]
-                            return call("{} {} {}".format(cls_nm,
-                                obj_id, arg_dict))
+                            call=method_dict[cmd_met]
+                            return call("{} {} {}".format(class_name,
+                                        obj_id, arg_dict))
                         except Exception:
                             pass
                     else:
                         print("*** Unknown syntax: {}".format(arg))
                         return False
 
-            if __name__ == "__main__":
-                HBNBCommand().cmdloop()
+
+if __name__ == "__main__":
+
+    HBNBCommand().cmdloop()
